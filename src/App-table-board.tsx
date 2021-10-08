@@ -1,10 +1,30 @@
 import React from 'react';
 import './App.scss';
+// import { IAppTableBoard } from './interface/IAppTableBoard';
 
-class AppTableBoard extends React.Component {
-    constructor(props) {
+interface Props {
+    modelData: boolean[][]
+}
+
+interface State {
+    modelData: any
+}
+
+class AppTableBoard extends React.Component<Props, State> {
+    constructor(props: { modelData: [[boolean]] }) {
         super(props);
-        this.state = props.model;
+        this.state = { modelData: props.modelData };
+    }
+
+    handleTest (e: any) {
+        console.log(e)
+        console.log(e.charCode)
+        if (e.charCode == 13) {
+            alert('Enter... (KeyPress, use charCode)');
+        }
+        if (e.keyCode == 13) {
+            alert('Enter... (KeyDown, use keyCode)');
+        }
     }
 
     renderTableLine( model: [boolean] ) {
@@ -18,10 +38,10 @@ class AppTableBoard extends React.Component {
         )
     }
 
-    renderTable(model) {
+    renderTable(model: any) {
         return (
-            <tbody>
-                { model.map(( item ) => {
+            <tbody onKeyPress={this.handleTest}>
+                { model.map(( item: any ) => {
                    return  this.renderTableLine(item)
                   })}
             </tbody>
@@ -31,8 +51,8 @@ class AppTableBoard extends React.Component {
     render() {
         return (
             <div className="App-table-board">
-                <table border="1">
-                    { this.renderTable(this.state) }
+                <table>
+                    { this.renderTable(this.state.modelData) }
                 </table>
             </div>
         );

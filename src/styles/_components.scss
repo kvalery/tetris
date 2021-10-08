@@ -72,3 +72,18 @@ body{
     }
   }
 }
+
+.App-controls-block{
+  padding: 20px 2px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  button{
+    border: 1px solid $blue;
+    background: transparent;
+    color: $blue;
+    width: 30px;
+    height: 30px;
+  }
+
+}
