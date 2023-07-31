@@ -2,14 +2,14 @@ import React from 'react';
 import Button from 'react-bootstrap/Button';
 
 const TetrisKeyboard = () => {
+  function detect(){
+    console.log('detect', )
+  }
   return (
     <div>
-
-
-      <Button variant="success">{'<'}</Button>{' '}
-      <Button variant="warning">{'||'}</Button>{' '}
-      <Button variant="success">{'>'}</Button>{' '}
-
+      <Button onClick={detect} variant="success">{'<'}</Button>{' '}
+      <Button onClick={detect} variant="warning">{'||'}</Button>{' '}
+      <Button onClick={detect} variant="success">{'>'}</Button>{' '}
     </div>
   );
 };
