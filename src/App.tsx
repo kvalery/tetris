@@ -10,42 +10,21 @@ import {
 } from "react-router-dom";
 import { routs } from './router/routs';
 import { useDispatch, useSelector, } from 'react-redux';
-import { gameAdd, gameStart } from './redux/actions/gameActions';
-import { store } from './redux/store';
+import { gameAdd, gameStart } from './store/actions/gameActions';
+import { store } from './store';
+import { gameReducer } from './store/redusers/gameReducer';
 
+/** главный компонент приложения */
 function App() {
-  // список роутов
+
+  /** получаем список роутов для отображения в навигации */
   const routsApp = routs;
 
   // ссылка на стор
-  const storeApp = store;
-
+  // const storeApp = index;
   const dispatch = useDispatch()
 
   const game = useSelector(state => state)
-
-  console.log('', game)
-
-  // получить данные state
-  // const state = store.getState()
-
-  // // создание стора вызов createStore()
-  // const appStore: any = store;
-
-
-  // const game = useSelector(state => state.game)
-  // console.log('', state )
-  // console.log('', store, routs)
-
-
-  // const isLoggedIn = useSelector((state: any) => state.game(1) );
-
-  // const dispatch = store.dispatch(  )
-  // const game = useSelector(state => state.game)
-
-  // const isLoggedIn = useSelector(() => {
-  //   return console.log('sss',)
-  // });
 
   // подписка на изменение стора
   store.subscribe(() => console.log('-----', store.getState() ) )
@@ -54,36 +33,34 @@ function App() {
     console.log('testTest dispatch',)
     dispatch(gameAdd())
 
-    // store.dispatch( gameStart())
+    // index.dispatch( gameStart())
   }
 
   return (
     <div id="App">
-
-      <button onClick={testTest}>test</button>
-
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container>
         <Navbar.Brand>TETRIS by React</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            {routs.map(rout =>
-              <Nav.Link as={Link} to={rout.path}>{rout.title}</Nav.Link>
-            )}
+            {routsApp.map( (rout, index:number) =>{
+              return <Nav.Link key={index} as={Link} to={rout.path}>{rout.title}</Nav.Link>
+            })}
           </Nav>
         </Navbar.Collapse>
       </Container>
     </Navbar>
+    { /* Основной контент */}
     <Container>
-      <Row>
-        <Routes>
-          {routs.map(rout =>
-            <Route path={rout.path} element={rout.element} />
-          )}
-        </Routes>
-      </Row>
-    </Container>
+    <Row>
+      <Routes>
+        {routsApp.map((rout, index:number) => {
+          return <Route key={index} path={ rout.path } element={ rout.element }/>
+        })}
+      </Routes>
+    </Row>
+  </Container>
   </div>
   );
 }

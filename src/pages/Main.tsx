@@ -5,7 +5,9 @@ import { getNewModel } from '../models/models';
 import TetrisField from '../components/tetris-field';
 
 function Maine(){
+
   const model: [[boolean]] = getNewModel()
+  console.log('компонент Maine, модель игры', model)
 
   return (
     <Container>
