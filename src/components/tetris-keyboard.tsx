@@ -16,6 +16,11 @@ const TetrisKeyboard = ( props: any ) => {
    * {() => method(1) } вызов методов с параметрами через стрелочную функцию??
    * */
 
+  /** ???
+   * в чем разница для использования function и () = >
+   * могу например, везде использовать стрелку?
+   * */
+
   /** событие управления */
   const actionDetect = (param: string) => {
     props.keyboardAction(param)
