@@ -3,6 +3,14 @@ import Button from 'react-bootstrap/Button';
 import { Col, Container, Row } from 'react-bootstrap';
 import TetrisKeyboard from './tetris-keyboard';
 
+/** ???
+ * props: any - не красиво
+ * как определять типы для текущих и будущих пропсов,
+ * с учотом того что их может быть много, среди них есть функции обратного вызова
+ * и будут добавляться еще
+ * */
+
+/** непосредственно компонент поля с контроллами */
 const TetrisField = (props: any) => {
 
   // const [model, setModel] = useState(props.model);
@@ -14,6 +22,7 @@ const TetrisField = (props: any) => {
 
   function addItem(){
     console.log('проверка квадратиков',)
+    props.endGameAction()
     // let newModel = model;
     // (newModel[2])[0] = !((newModel[2])[0]);
     //

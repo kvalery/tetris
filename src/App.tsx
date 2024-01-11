@@ -9,32 +9,12 @@ import {
   Routes
 } from "react-router-dom";
 import { routs } from './router/routs';
-import { useDispatch, useSelector, } from 'react-redux';
-import { gameAdd, gameStart } from './store/actions/gameActions';
-import { store } from './store';
-import { gameReducer } from './store/redusers/gameReducer';
 
 /** главный компонент приложения */
 function App() {
 
   /** получаем список роутов для отображения в навигации */
   const routsApp = routs;
-
-  // ссылка на стор
-  // const storeApp = index;
-  const dispatch = useDispatch()
-
-  const game = useSelector(state => state)
-
-  // подписка на изменение стора
-  store.subscribe(() => console.log('-----', store.getState() ) )
-
-  function testTest() {
-    console.log('testTest dispatch',)
-    dispatch(gameAdd())
-
-    // index.dispatch( gameStart())
-  }
 
   return (
     <div id="App">

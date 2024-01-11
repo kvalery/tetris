@@ -1,12 +1,18 @@
-import { ACTION, ACTION_GET_JSON } from '../actions/actions';
+import { ACTION } from '../actions/actions';
 
-export const userActionReducer = (state = { value: 0 }, action: {type: any, payload: any}) => {
+
+const defaultActionState = { value: 0 }
+
+/** редюссер игры все что связанно с ходом игры и игровым тиком
+ *  событие старт игры
+ *  @see GAME_START
+ *  событие конца игры
+ *  @see GAME_AND
+ * */
+
+export const userActionReducer = (state = defaultActionState, action: {type: any, payload: any}) => {
   if (action.type === ACTION){
     return { value: state.value + 1 }
-  }
-  if (action.type === ACTION_GET_JSON){
-    console.log('userActionReducera', action)
-    return { value: state.value + 10 }
   }
   return state
 }
