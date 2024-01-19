@@ -17,12 +17,11 @@ const defaultGameState = {
 export const gameReducer = (state = defaultGameState, action: {type: any}) => {
 
   if (action.type === GAME_START){
-    return defaultGameState
+    return { gameModel: getNewModel() }
   }
 
   if (action.type === GAME_AND){
-    console.log('', state.gameModel[0][0])
-    return { gameModel: (!!state.gameModel[0][0])? getNewModel() : getModelEnd() }
+    return { gameModel: getModelEnd() }
   }
 
   return state

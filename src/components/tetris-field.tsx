@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import { Col, Container, Row } from 'react-bootstrap';
 import TetrisKeyboard from './tetris-keyboard';
+import { IFieldItemModel } from '../Interfase/gameInterface.interface';
 
 /** ???
  * props: any - не красиво
@@ -13,39 +14,6 @@ import TetrisKeyboard from './tetris-keyboard';
 /** непосредственно компонент поля с контроллами */
 const TetrisField = (props: any) => {
 
-  // const [model, setModel] = useState(props.model);
-
-  // получение модели от родителя
-  // для дальнейшей отрисовки
-  const model = props.model;
-
-
-  function addItem(){
-    console.log('проверка квадратиков',)
-    props.endGameAction()
-    // let newModel = model;
-    // (newModel[2])[0] = !((newModel[2])[0]);
-    //
-    // // newModel2[0] = newModel2[0].map(( item ) => {return !item})
-    //
-    // console.log('', model)
-    // setModel([...newModel])
-  }
-
-  /** события нажатия на кнопки управления */
-  const keyboardAction = ( keyboardActionType: string ) => {
-    if (keyboardActionType === 'left' ) {
-      console.log('L',)
-    }
-    if (keyboardActionType === 'right') {
-      console.log('R',)
-    }
-    if (keyboardActionType === 'down') {
-      console.log('D',)
-    }
-
-  }
-
   return (
       <Container >
 
@@ -53,12 +21,12 @@ const TetrisField = (props: any) => {
 
             <Col  md={{ span: 3, offset: 1 }}>
               <div className={'tetris-field'}>
-                {model.map((item: [], index:number)  => {
+                {props.model.map((item: [], index:number)  => {
                   return <div key={index} className={'tetris-row'}>
-                  {item.map( (point: boolean, i:number) =>{
+                  {item.map( (fieldItem: IFieldItemModel, i:number) =>{
                     return  <div key={index.toString() + i.toString()} className={
                       'tetris-point' +
-                      (!!point ? " tetris-point__active " : " ")
+                      (!!fieldItem.fieldValue ? " tetris-point__active " : " ")
                     }></div>
                   } )}
                 </div>})
@@ -70,13 +38,12 @@ const TetrisField = (props: any) => {
 
         <Row className="justify-content-center">
           <Col  md={{ span: 3, offset: 1 }}>
-            <TetrisKeyboard keyboardAction = {keyboardAction} />
+            <TetrisKeyboard keyboardAction = { props.eventGameAction } />
           </Col>
         </Row>
 
-        {/*<Button onClick={keyboardAction} variant="primary">Primary</Button>{' ssss '}*/}
-
-        <Button onClick={addItem} variant="primary">Primary</Button>{' '}
+        <Button onClick={props.endGameAction} variant="primary">конец</Button>{'  '}
+        <Button onClick={props.startGameAction} variant="warning">старт</Button>
 
       </Container>
   );
