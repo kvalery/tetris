@@ -69,7 +69,7 @@ function Maine(){
       <Row>
         <Col>
           <TetrisField
-            model={ gameModel.field }
+            model={ gameModel.fieldForeVue }
             eventGameAction = {eventGameAction}
             endGameAction={endGame}
             startGameAction={startGame}

@@ -1,12 +1,13 @@
-import { getNewFigure } from '../models/models';
 import { Figure, FigurePosition } from '../types/game-types';
 
 /** интерфейс игрового поля */
 export interface IFieldModel {
   // игровое поле
-  field: IFieldItemModel[][],
+  field?: IFieldItemModel[][],
   // фигура
-  figure?: IFigureModel
+  figure?: IFigureModel,
+  // поле дял отображения
+  fieldForeVue: IFieldItemModel[][],
 }
 
 /** интерфейс для одного деления игрового поля
@@ -27,6 +28,8 @@ export interface IFigureModel {
   type: Figure,
   // позиция фигуры в пространстве
   figurePosition: FigurePosition,
+  // описание фигуры в пространстве игрового поля
+  figureField: IFieldItemModel[][],
   // координаты
   figureCoordinates?: {
     column: number,

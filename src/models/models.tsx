@@ -1,70 +1,87 @@
 import { IFieldItemModel, IFieldModel, IFigureModel } from '../Interfase/gameInterface.interface';
-import { randomBoolean, randomFigure, randomFigurePosition, uuidv4 } from '../utils/app-utils';
-import { Figure, FigurePosition } from '../types/game-types';
-
-/** дефолтная модель ячейки */
-export function itemModel(): IFieldItemModel {
-  return {
-    id: uuidv4(),
-    fieldValue: randomBoolean()
-  }
-}
+import { randomBoolean, randomFigure, randomFigurePosition } from '../utils/app-utils';
+import { figureToFieldMap, getBlankFieldModel, randomRows } from '../utils/model-utils';
 
 /** модель для начала игры */
 export function getNewModel(rows: number = 20 , columns: number = 10): IFieldModel {
   // модель поля
-  let model = []
-  // формируем строки
-  for ( let i = 0; i < rows; i++ ) {
-    const modelRow = []
-    for ( let j = 0; j < columns; j++ ) {
-      const newItem = itemModel()
-      // формируем начальную позицию, нижние строки поля
-      if (i < 15) {
-        newItem['fieldValue'] = false;
-      }
-      modelRow.push( newItem )
-    }
-    model.push(modelRow)
-  }
+  let field = getBlankFieldModel()
+
+  // формируем строки рандомного выбора
+  field = randomRows(field, 15)
+
+  // инициализируем модель фигуры
+  const figure = newFigure()
+
+  const fieldForeVue = figureToFieldMap(field, figure)
 
   return {
-    field: model,
-    figure: getNewFigure()
+    field: field,
+    figure: figure,
+    fieldForeVue: fieldForeVue
+  }
+}
+
+/** модель для конца игры */
+export function getModelEnd(rows: number = 20 , columns: number = 10): IFieldModel {
+  return {
+    fieldForeVue: getBlankFieldModel(true)
   }
 }
 
 /** получение новой фигуры
  * фигура появляеться всегда по центру
  * */
-export function getNewFigure(): IFigureModel {
-  return {
-    type: randomFigure(),
-    figurePosition: randomFigurePosition(),
-    figureCoordinates: {
-      column: 5,
-      line: 18
-    },
-  }
+export function newFigure(): IFigureModel {
+
+  const type = randomFigure();
+  const figurePosition = randomFigurePosition();
+  const figureCoordinates = { column: 4, line: 3 };
+
+  // модель поля c фигурой
+  const figureField = getBlankFieldModel();
+
+  return defineFigureToModelField({
+      type: type,
+      figurePosition: figurePosition,
+      figureCoordinates: figureCoordinates,
+      figureField: figureField,
+    }
+   )
 }
 
-/** модель для конца игры */
-export function getModelEnd(rows: number = 20 , columns: number = 10): IFieldModel {
-  let model = []
-  // формируем строки
-  for ( let i = 0; i < rows; i++ ) {
-    const modelRow = []
-    for ( let j = 0; j < columns; j++ ) {
-      const newItem = itemModel()
-      // формируем начальную позицию, нижние строки поля
-      newItem['fieldValue'] = true;
-      modelRow.push( newItem )
-    }
-    model.push(modelRow)
-  }
-  return {
-    field: model,
-  }
+/** определить фигуру в поле по координатам  */
+export function defineFigureToModelField(figureModel: IFigureModel): IFigureModel {
+  const model = figureModel;
+  const line = figureModel.figureCoordinates?.line || 0;
+  const column = model.figureCoordinates?.column || 0;
+
+  model.figureField[line][column].fieldValue = true;
+
+  console.log('', model.figureField[line][column].fieldValue)
+  console.log('', model)
+  return model
 }
+
+
+
+
+
+/** добовление фигуры в модель
+ * @return  model - модель
+ * status - true удалось обратотать можно продолжить игру
+ * */
+export function addFigureToModel( model: IFieldItemModel[][], figure: IFigureModel): { model: IFieldItemModel[][], status: boolean } {
+  // начальное значение ответа
+  const result = {
+    model: model,
+    status: true
+  }
+
+  return result
+}
+
+
+
 
 
