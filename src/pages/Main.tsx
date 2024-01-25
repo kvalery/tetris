@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import { getNewModel } from '../models/models';
 import TetrisField from '../components/tetris-field';
 import { useDispatch, useSelector } from 'react-redux';
-import { gameAnd, gameStart } from '../store/actions/gameActions';
+import { gameAnd, gameDown, gameLeft, gameRight, gameStart } from '../store/actions/gameActions';
 import { IFieldItemModel, IFieldModel } from '../Interfase/gameInterface.interface';
 
 function Maine(){
@@ -36,7 +36,6 @@ function Maine(){
      * какой тип нужен для этого
      * и вообще как принято типизировать стор стейт итд...
      * */
-    console.log('state', state )
     // @ts-ignore
     return state.game.gameModel })
 
@@ -53,13 +52,13 @@ function Maine(){
   /** событие управление игрой */
   const eventGameAction = (keyboardActionType: string) => {
     if (keyboardActionType === 'left' ) {
-      console.log('L',)
+      dispatch(gameLeft(gameModel))
     }
     if (keyboardActionType === 'right') {
-      console.log('R',)
+      dispatch(gameRight(gameModel))
     }
     if (keyboardActionType === 'down') {
-      console.log('D',)
+      dispatch(gameDown(gameModel))
     }
 
   }
