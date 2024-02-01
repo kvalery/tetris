@@ -1,5 +1,12 @@
-import { GAME_AND, GAME_LEFT, GAME_RIGHT, GAME_START } from '../actions/gameActions';
-import { getModelEnd, getNewModel, tryModelLeft, tryModelRight } from '../../models/models';
+import { GAME_AND, GAME_DOWN, GAME_LEFT, GAME_REVERS, GAME_RIGHT, GAME_START } from '../actions/gameActions';
+import {
+  getModelEnd,
+  getNewModel,
+  tryModelDown,
+  tryModelLeft,
+  tryModelRevers,
+  tryModelRight
+} from '../../models/models';
 
 /** игровая модель по умолчанию
  *
@@ -36,6 +43,14 @@ export const gameReducer = (state = defaultGameState, action: {type: any}) => {
 
   if (action.type === GAME_RIGHT){
     return { gameModel: tryModelRight(state.gameModel) }
+  }
+
+  if (action.type === GAME_DOWN){
+    return { gameModel: tryModelDown(state.gameModel) }
+  }
+
+  if (action.type === GAME_REVERS){
+    return { gameModel: tryModelRevers(state.gameModel) }
   }
 
   return state

@@ -13,6 +13,7 @@ export const GAME_AND = 'GAME_AND'
 export const GAME_LEFT = 'GAME_LEFT'
 export const GAME_RIGHT = 'GAME_RIGHT'
 export const GAME_DOWN = 'GAME_DOWN'
+export const GAME_REVERS = 'GAME_REVERS'
 
 /** ActionCreator
  * @see GAME_START */
@@ -60,6 +61,16 @@ export function gameRight(payload: any){
 export function gameDown(payload: any){
   return {
     type: GAME_DOWN,
+    payload
+  }
+}
+
+/** ActionCreator
+ * @see GAME_REVERS
+ * */
+export function gameRevers(payload: any){
+  return {
+    type: GAME_REVERS,
     payload
   }
 }

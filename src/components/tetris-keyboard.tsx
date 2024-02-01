@@ -31,6 +31,7 @@ const TetrisKeyboard = ( props: any ) => {
       <Button onClick={() => actionDetect('left')} variant="success">{'<'}</Button>{' '}
       <Button onClick={() => actionDetect('down')} variant="warning">{'||'}</Button>{' '}
       <Button onClick={() => actionDetect('right')} variant="success">{'>'}</Button>{' '}
+      <Button onClick={() => actionDetect('revers')} variant="warning">{'()'}</Button>{' '}
     </div>
   );
 };

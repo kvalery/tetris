@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import { getNewModel } from '../models/models';
 import TetrisField from '../components/tetris-field';
 import { useDispatch, useSelector } from 'react-redux';
-import { gameAnd, gameDown, gameLeft, gameRight, gameStart } from '../store/actions/gameActions';
+import { gameAnd, gameDown, gameLeft, gameRevers, gameRight, gameStart } from '../store/actions/gameActions';
 import { IFieldItemModel, IFieldModel } from '../Interfase/gameInterface.interface';
 
 function Maine(){
@@ -59,6 +59,9 @@ function Maine(){
     }
     if (keyboardActionType === 'down') {
       dispatch(gameDown(gameModel))
+
+    } if (keyboardActionType === 'revers') {
+      dispatch(gameRevers(gameModel))
     }
 
   }
